@@ -9,9 +9,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
-public class MedicalStock extends JFrame implements WindowListener {
+public class Medical extends JFrame implements WindowListener {
 
-	public MedicalStock() {
+	public Medical() {
 
 		int x_axes = 10, y_axes = 10, height = 150, width = 50;
 

@@ -1,15 +1,21 @@
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 
 import com.hospital.Hospital;
-import com.medical.MedicalStock;
+import com.medical.Medical;
 
 public class Admin extends JFrame implements ActionListener {
 
 	private JButton medical, hospital;
+	JMenu menu;
+	JMenuItem profile, create_account;
 
 	public Admin() {
 		int x_axes = 50, y_axes = 50, height = 150, width = 30;
@@ -31,6 +37,17 @@ public class Admin extends JFrame implements ActionListener {
 		hospital.addActionListener(this);
 		add(hospital);
 
+		JMenuBar jBar = new JMenuBar();
+		jBar.setBounds(x_axes + 90, y_axes + 50, height, width + 50);
+
+		menu = new JMenu("Menu");
+		profile = new JMenuItem("Profile");
+		create_account = new JMenuItem("Create Account");
+		menu.add(profile);
+		menu.add(create_account);
+		jBar.add(menu);
+		setJMenuBar(jBar);
+
 	}
 
 	public static void main(String[] args) {
@@ -46,7 +63,7 @@ public class Admin extends JFrame implements ActionListener {
 			new Hospital().setVisible(true);
 		} else if (e.getActionCommand().equalsIgnoreCase(medical.getText())) {
 			this.dispose();
-			new MedicalStock().setVisible(true);
+			new Medical().setVisible(true);
 		}
 
 	}
