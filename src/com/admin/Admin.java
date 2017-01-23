@@ -1,4 +1,5 @@
-import java.awt.BorderLayout;
+package com.admin;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -10,6 +11,9 @@ import javax.swing.JMenuItem;
 
 import com.hospital.Hospital;
 import com.medical.Medical;
+import com.util.Utility;
+
+import db.DBUtil;
 
 public class Admin extends JFrame implements ActionListener {
 
@@ -41,30 +45,39 @@ public class Admin extends JFrame implements ActionListener {
 		jBar.setBounds(x_axes + 90, y_axes + 50, height, width + 50);
 
 		menu = new JMenu("Menu");
+
 		profile = new JMenuItem("Profile");
-		create_account = new JMenuItem("Create Account");
+		profile.addActionListener(this);
 		menu.add(profile);
+
+		create_account = new JMenuItem("Create Account");
 		menu.add(create_account);
+
 		jBar.add(menu);
 		setJMenuBar(jBar);
 
 	}
 
-//	public static void main(String[] args) {
-//
-//		Admin a = new Admin();
-//		a.setVisible(true);
-//	}
+	// public static void main(String[] args) {
+	//
+	// Admin a = new Admin();
+	// a.setVisible(true);
+	// }
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getActionCommand().equalsIgnoreCase(hospital.getText())) {
-			this.dispose();
-			new Hospital().setVisible(true);
-		} else if (e.getActionCommand().equalsIgnoreCase(medical.getText())) {
-			this.dispose();
-			new Medical().setVisible(true);
+		if (Utility.getLoginToken(DBUtil.getCon())) {
+			if (e.getActionCommand().equalsIgnoreCase(hospital.getText())) {
+				this.dispose();
+				new Hospital().setVisible(true);
+			} else if (e.getActionCommand().equalsIgnoreCase(medical.getText())) {
+				this.dispose();
+				new Medical().setVisible(true);
+			} else if (e.getActionCommand().equalsIgnoreCase(profile.getText())) {
+				new AdminProfile().setVisible(true);
+			}
+		} else {
+			Utility.warningPopup("Please Login first to check your Profile");
 		}
-
 	}
 }

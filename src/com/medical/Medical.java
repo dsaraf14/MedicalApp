@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -26,8 +27,14 @@ public class Medical extends JFrame implements WindowListener {
 
 		// --------------------------------------------------------------
 
+		JButton temp = new JButton("temp");
+		
+		
 		JTabbedPane medicalStockPane = new JTabbedPane();
 		JPanel stockPanel = new JPanel();
+		stockPanel.add(temp);
+		add(temp);
+		
 		medicalStockPane.add("Stock Management", stockPanel);
 
 		JPanel billPanel = new JPanel();
@@ -72,4 +79,8 @@ public class Medical extends JFrame implements WindowListener {
 	@Override
 	public void windowOpened(WindowEvent e) {
 	}
+	//	
+//	public static void main(String[] args) {
+//		new Medical().setVisible(true);
+//	}
 }

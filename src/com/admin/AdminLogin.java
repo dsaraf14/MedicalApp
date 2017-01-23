@@ -1,3 +1,5 @@
+package com.admin;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
@@ -9,7 +11,6 @@ import java.util.Properties;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import com.hospital.Hospital;
@@ -25,6 +26,7 @@ public class AdminLogin extends JFrame implements ActionListener {
 	JButton login, reset;
 	Connection con = DBUtil.getCon();
 	Properties p = Utility.readProperties();
+	public static String loggedInEmail;
 
 	public AdminLogin() {
 		int x_axes = 50, y_axes = 70, height = 160, width = 25;
@@ -76,10 +78,12 @@ public class AdminLogin extends JFrame implements ActionListener {
 			if (emailField.getText() == null || emailField.getText().equals("")
 					|| passField.getText() == null
 					|| passField.getText().equals("")) {
-				Utility.warningPopup("Please fill all the Mendatory fields....");
+				Utility.warningPopup("Please fill all the Mendatory fields...");
 			} else {
 				if (validateUser()) {
 					String role = getRole();
+					loggedInEmail = emailField.getText();
+					Utility.setLoginToken(true, DBUtil.getCon());
 					if (role.equalsIgnoreCase(p.getProperty("AdminRole"))) {
 						this.dispose();
 						new Admin().setVisible(true);
@@ -100,7 +104,6 @@ public class AdminLogin extends JFrame implements ActionListener {
 			emailField.setText("");
 			passField.setText("");
 		}
-
 	}
 
 	private boolean validateUser() {
