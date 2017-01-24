@@ -51,6 +51,7 @@ public class Admin extends JFrame implements ActionListener {
 		menu.add(profile);
 
 		create_account = new JMenuItem("Create Account");
+		create_account.addActionListener(this);
 		menu.add(create_account);
 
 		jBar.add(menu);
@@ -75,6 +76,9 @@ public class Admin extends JFrame implements ActionListener {
 				new Medical().setVisible(true);
 			} else if (e.getActionCommand().equalsIgnoreCase(profile.getText())) {
 				new AdminProfile().setVisible(true);
+			} else if (e.getActionCommand().equalsIgnoreCase(
+					create_account.getText())) {
+				new CreateAccount().setVisible(true);
 			}
 		} else {
 			Utility.warningPopup("Please Login first to check your Profile");

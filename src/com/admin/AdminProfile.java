@@ -100,7 +100,6 @@ public class AdminProfile extends JFrame implements ActionListener {
 		if (arg0.getActionCommand().equalsIgnoreCase(logout.getText())) {
 			inValidate();
 		} else if (arg0.getActionCommand().equalsIgnoreCase(update.getText())) {
-
 			if (passField.getText().equalsIgnoreCase("")
 					|| passField.getText() == null) {
 				Utility.warningPopup("Password field must not be empty");
