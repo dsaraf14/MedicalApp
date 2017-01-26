@@ -82,7 +82,7 @@ public class AdminLogin extends JFrame implements ActionListener {
 			} else {
 				if (validateUser()) {
 					String role = getRole();
-					loggedInEmail = emailField.getText();
+					loggedInEmail = emailField.getText().toLowerCase();
 					Utility.setLoginToken(true, DBUtil.getCon());
 					if (role.equalsIgnoreCase(p.getProperty("AdminRole"))) {
 						this.dispose();

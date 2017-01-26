@@ -90,7 +90,7 @@ public class CreateAccount extends JFrame implements ActionListener {
 					Connection con = DBUtil.getCon();
 					try (PreparedStatement ps = con
 							.prepareStatement("INSERT INTO sign_up(email, password, role) VALUES(?, ?, ?)");) {
-						ps.setString(1, emailField.getText());
+						ps.setString(1, emailField.getText().toLowerCase());
 						ps.setString(2, passField.getText());
 						ps.setString(3, (String) roleDropdown.getSelectedItem());
 						if (ps.executeUpdate() != 0) {

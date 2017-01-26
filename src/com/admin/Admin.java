@@ -8,6 +8,10 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JToolBar;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.Border;
+import javax.swing.border.EtchedBorder;
 
 import com.hospital.Hospital;
 import com.medical.Medical;
@@ -19,7 +23,7 @@ public class Admin extends JFrame implements ActionListener {
 
 	private JButton medical, hospital;
 	JMenu menu;
-	JMenuItem profile, create_account;
+	JMenuItem profile, create_account, manageAccount;
 
 	public Admin() {
 		int x_axes = 50, y_axes = 50, height = 150, width = 30;
@@ -54,16 +58,21 @@ public class Admin extends JFrame implements ActionListener {
 		create_account.addActionListener(this);
 		menu.add(create_account);
 
+		manageAccount = new JMenuItem("Manage Account");
+		manageAccount.addActionListener(this);
+		menu.add(manageAccount);
+
 		jBar.add(menu);
+		// jBar.setBorder(new BevelBorder(BevelBorder.RAISED));
 		setJMenuBar(jBar);
 
 	}
 
-	// public static void main(String[] args) {
-	//
-	// Admin a = new Admin();
-	// a.setVisible(true);
-	// }
+//	public static void main(String[] args) {
+//
+//		Admin a = new Admin();
+//		a.setVisible(true);
+//	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -79,9 +88,12 @@ public class Admin extends JFrame implements ActionListener {
 			} else if (e.getActionCommand().equalsIgnoreCase(
 					create_account.getText())) {
 				new CreateAccount().setVisible(true);
+			} else if (e.getActionCommand().equalsIgnoreCase(
+					manageAccount.getText())) {
+				new ManageAccount().setVisible(true);
 			}
 		} else {
-			Utility.warningPopup("Please Login first to check your Profile");
+			Utility.warningPopup("Please Login first to do this operation");
 		}
 	}
 }
