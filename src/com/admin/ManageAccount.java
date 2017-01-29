@@ -25,6 +25,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
 import com.util.Utility;
@@ -108,7 +109,7 @@ public class ManageAccount extends JFrame implements ActionListener {
 
 				@Override
 				public boolean isCellEditable(int row, int column) {
-					// Only the third & forth column
+					// Only the third & forth column is editable
 					return column == 3 || column == 4;
 				}
 			};
