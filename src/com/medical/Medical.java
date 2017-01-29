@@ -12,9 +12,11 @@ import javax.swing.JTabbedPane;
 
 public class Medical extends JFrame implements WindowListener {
 
+	private static final long serialVersionUID = -1161411112922594814L;
+
 	public Medical() {
 
-		int x_axes = 10, y_axes = 10, height = 150, width = 50;
+		// int x_axes = 10, y_axes = 10, height = 150, width = 50;
 
 		setSize(600, 350);
 		setLocationRelativeTo(this);
@@ -28,13 +30,12 @@ public class Medical extends JFrame implements WindowListener {
 		// --------------------------------------------------------------
 
 		JButton temp = new JButton("temp");
-		
-		
+
 		JTabbedPane medicalStockPane = new JTabbedPane();
 		JPanel stockPanel = new JPanel();
 		stockPanel.add(temp);
 		add(temp);
-		
+
 		medicalStockPane.add("Stock Management", stockPanel);
 
 		JPanel billPanel = new JPanel();
@@ -79,8 +80,8 @@ public class Medical extends JFrame implements WindowListener {
 	@Override
 	public void windowOpened(WindowEvent e) {
 	}
-	//	
-//	public static void main(String[] args) {
-//		new Medical().setVisible(true);
-//	}
+	//
+	// public static void main(String[] args) {
+	// new Medical().setVisible(true);
+	// }
 }

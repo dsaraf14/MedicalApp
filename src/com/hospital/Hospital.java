@@ -10,8 +10,13 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
 public class Hospital extends JFrame implements WindowListener {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9175266577140865964L;
+
 	public Hospital() {
-		int x_axes = 50, y_axes = 50, height = 150, width = 30;
+		// int x_axes = 50, y_axes = 50, height = 150, width = 30;
 
 		setSize(600, 350);
 		setLocationRelativeTo(this);

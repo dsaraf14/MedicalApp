@@ -1,3 +1,7 @@
+/**
+ *
+ * @author Deepak saraf
+ */
 package com.admin;
 
 import java.awt.event.ActionEvent;
@@ -8,10 +12,6 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JToolBar;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.Border;
-import javax.swing.border.EtchedBorder;
 
 import com.hospital.Hospital;
 import com.medical.Medical;
@@ -21,6 +21,7 @@ import db.DBUtil;
 
 public class Admin extends JFrame implements ActionListener {
 
+	private static final long serialVersionUID = 1515835233916449422L;
 	private JButton medical, hospital;
 	JMenu menu;
 	JMenuItem profile, create_account, manageAccount;
@@ -68,11 +69,11 @@ public class Admin extends JFrame implements ActionListener {
 
 	}
 
-//	public static void main(String[] args) {
-//
-//		Admin a = new Admin();
-//		a.setVisible(true);
-//	}
+	// public static void main(String[] args) {
+	//
+	// Admin a = new Admin();
+	// a.setVisible(true);
+	// }
 
 	@Override
 	public void actionPerformed(ActionEvent e) {

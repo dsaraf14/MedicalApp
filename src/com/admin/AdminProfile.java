@@ -1,3 +1,7 @@
+/**
+ *
+ * @author Deepak saraf
+ */
 package com.admin;
 
 import java.awt.GridLayout;
@@ -20,6 +24,7 @@ import db.DBUtil;
 
 public class AdminProfile extends JFrame implements ActionListener {
 
+	private static final long serialVersionUID = 1652431577218424776L;
 	JLabel name, email, phoneNo, password;
 	JTextField nameField, emailField, phField, passField;
 	JButton logout, update;

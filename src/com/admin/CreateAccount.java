@@ -1,3 +1,7 @@
+/**
+ *
+ * @author Deepak saraf
+ */
 package com.admin;
 
 import java.awt.GridLayout;
@@ -20,7 +24,7 @@ import com.util.Utility;
 import db.DBUtil;
 
 public class CreateAccount extends JFrame implements ActionListener {
-
+	private static final long serialVersionUID = 4780468050316415150L;
 	JLabel email, password, role;
 	JTextField emailField;
 	JPasswordField passField;
@@ -28,7 +32,6 @@ public class CreateAccount extends JFrame implements ActionListener {
 	JButton createAccount, reset;
 
 	public CreateAccount() {
-		int x_axes = 50, y_axes = 50, height = 150, width = 30;
 
 		setSize(500, 300);
 		setLocationRelativeTo(this);

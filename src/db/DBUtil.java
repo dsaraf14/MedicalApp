@@ -21,8 +21,7 @@ public class DBUtil {
 		try {
 			Class.forName(p.getProperty("DriverName"));
 			con = DriverManager.getConnection(
-					"jdbc:mysql://localhost:" + p.getProperty("PortNo")
-							+ "/hms", "root", "rat");
+					"jdbc:mysql://localhost:3306/hms", "root", "rat");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {

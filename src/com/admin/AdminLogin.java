@@ -1,3 +1,7 @@
+/**
+ *
+ * @author Deepak saraf
+ */
 package com.admin;
 
 import java.awt.event.ActionEvent;
@@ -12,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 
 import com.hospital.Hospital;
 import com.medical.Medical;
@@ -21,6 +26,7 @@ import db.DBUtil;
 
 public class AdminLogin extends JFrame implements ActionListener {
 
+	private static final long serialVersionUID = -7379808706616999817L;
 	JLabel email, password;
 	JTextField emailField, passField;
 	JButton login, reset;
@@ -67,11 +73,6 @@ public class AdminLogin extends JFrame implements ActionListener {
 		reset.addActionListener(this);
 	}
 
-	public static void main(String[] args) {
-		AdminLogin al = new AdminLogin();
-		al.setVisible(true);
-	}
-
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		if (arg0.getActionCommand().equals(login.getText())) {
@@ -81,20 +82,24 @@ public class AdminLogin extends JFrame implements ActionListener {
 				Utility.warningPopup("Please fill all the Mendatory fields...");
 			} else {
 				if (validateUser()) {
-					String role = getRole();
-					loggedInEmail = emailField.getText().toLowerCase();
-					Utility.setLoginToken(true, DBUtil.getCon());
-					if (role.equalsIgnoreCase(p.getProperty("AdminRole"))) {
-						this.dispose();
-						new Admin().setVisible(true);
-					} else if (role.equalsIgnoreCase(p
-							.getProperty("MedicalRole"))) {
-						this.dispose();
-						new Medical().setVisible(true);
-					} else if (role.equalsIgnoreCase(p
-							.getProperty("HospitalRole"))) {
-						this.dispose();
-						new Hospital().setVisible(true);
+					if (isUserActive()) {
+						String role = getRole();
+						loggedInEmail = emailField.getText().toLowerCase();
+						Utility.setLoginToken(true, DBUtil.getCon());
+						if (role.equalsIgnoreCase(p.getProperty("AdminRole"))) {
+							this.dispose();
+							new Admin().setVisible(true);
+						} else if (role.equalsIgnoreCase(p
+								.getProperty("MedicalRole"))) {
+							this.dispose();
+							new Medical().setVisible(true);
+						} else if (role.equalsIgnoreCase(p
+								.getProperty("HospitalRole"))) {
+							this.dispose();
+							new Hospital().setVisible(true);
+						}
+					} else {
+						Utility.warningPopup("User is Disabled...Contact Administrator");
 					}
 				} else {
 					Utility.warningPopup("You are not a Valid user...");
@@ -135,5 +140,29 @@ public class AdminLogin extends JFrame implements ActionListener {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	private boolean isUserActive() {
+		try (PreparedStatement ps = con
+				.prepareStatement("SELECT active from sign_up where email = ?")) {
+			ps.setString(1, emailField.getText());
+			ResultSet rs;
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				return rs.getBoolean(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	public static void main(String[] args) {
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				new AdminLogin().setVisible(true);
+			}
+		});
 	}
 }
