@@ -34,7 +34,7 @@ public class Utility {
 	}
 
 	public static void warningPopup(String message) {
-		int i = JOptionPane.showConfirmDialog(null, message, "Warning",
+		int i = JOptionPane.showConfirmDialog(null, message, "",
 				JOptionPane.DEFAULT_OPTION);
 		switch (i) {
 		case JOptionPane.OK_OPTION:

@@ -27,11 +27,11 @@ import db.DBUtil;
 public class AdminLogin extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = -7379808706616999817L;
-	JLabel email, password;
-	JTextField emailField, passField;
-	JButton login, reset;
-	Connection con = DBUtil.getCon();
-	Properties p = Utility.readProperties();
+	private JLabel email, password;
+	private JTextField emailField, passField;
+	private JButton login, reset;
+	private Connection con = DBUtil.getCon();
+	private Properties p = Utility.readProperties();
 	public static String loggedInEmail;
 
 	public AdminLogin() {

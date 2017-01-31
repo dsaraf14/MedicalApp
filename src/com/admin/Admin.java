@@ -23,8 +23,8 @@ public class Admin extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1515835233916449422L;
 	private JButton medical, hospital;
-	JMenu menu;
-	JMenuItem profile, create_account, manageAccount;
+	private JMenu menu;
+	private JMenuItem profile, create_account, manageAccount;
 
 	public Admin() {
 		int x_axes = 50, y_axes = 50, height = 150, width = 30;
@@ -66,7 +66,6 @@ public class Admin extends JFrame implements ActionListener {
 		jBar.add(menu);
 		// jBar.setBorder(new BevelBorder(BevelBorder.RAISED));
 		setJMenuBar(jBar);
-
 	}
 
 	// public static void main(String[] args) {

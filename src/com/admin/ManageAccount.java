@@ -6,6 +6,7 @@ package com.admin;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -35,10 +36,10 @@ import db.DBUtil;
 public class ManageAccount extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
-	JTable table;
-	JPanel tablePanel = new JPanel();
-	JPanel buttonPanel = new JPanel();
-	JButton refresh, update;
+	private JTable table;
+	private JPanel tablePanel = new JPanel();
+	private JPanel buttonPanel = new JPanel();
+	private JButton refresh, update;
 
 	public ManageAccount() {
 		setSize(800, 400);
@@ -115,6 +116,10 @@ public class ManageAccount extends JFrame implements ActionListener {
 			};
 
 			table = new JTable(dm);
+			table.setRowHeight(20);
+			table.getTableHeader().setReorderingAllowed(false);
+			Font myFont = new Font("Serif", Font.BOLD, 14);
+			table.getTableHeader().setFont(myFont);
 
 			tablePanel.add(table);
 			JScrollPane scrollPane = new JScrollPane(table,

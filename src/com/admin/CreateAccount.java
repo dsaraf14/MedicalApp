@@ -25,11 +25,11 @@ import db.DBUtil;
 
 public class CreateAccount extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 4780468050316415150L;
-	JLabel email, password, role;
-	JTextField emailField;
-	JPasswordField passField;
-	JComboBox<String> roleDropdown;
-	JButton createAccount, reset;
+	private JLabel email, password, role;
+	private JTextField emailField;
+	private JPasswordField passField;
+	private JComboBox<String> roleDropdown;
+	private JButton createAccount, reset;
 
 	public CreateAccount() {
 
