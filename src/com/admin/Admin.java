@@ -68,11 +68,11 @@ public class Admin extends JFrame implements ActionListener {
 		setJMenuBar(jBar);
 	}
 
-	// public static void main(String[] args) {
-	//
-	// Admin a = new Admin();
-	// a.setVisible(true);
-	// }
+//	 public static void main(String[] args) {
+//	
+//	 Admin a = new Admin();
+//	 a.setVisible(true);
+//	 }
 
 	@Override
 	public void actionPerformed(ActionEvent e) {

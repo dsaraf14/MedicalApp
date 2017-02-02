@@ -42,9 +42,9 @@ public class Medical extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = -1161411112922594814L;
 
-	private JPanel stockPanel;
+	private JPanel stockPanel, topPanel;
 	private JButton addMoreRows, removeRows, addToDatabase;
-	private JMenu stockMenu;
+	private JMenu stockMenu, topMenu;
 	private JMenuItem stockList;
 	private static long serialNo = 1;
 	private JTable stockTable;
@@ -58,20 +58,31 @@ public class Medical extends JFrame implements ActionListener {
 		setResizable(true);
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
+//		topPanel = new JPanel();
+//		topPanel.setLayout(new BorderLayout());
+//		topMenu = new JMenu();
+//		JMenuItem topMenuItem = new JMenuItem("Profile");
+//		topMenu.add(topMenuItem);
+//		JMenuBar topMenuBar = new JMenuBar();
+//		topMenuBar.add(topMenu);
+//		setJMenuBar(topMenuBar);
+
+		// JButton j = new JButton("hskdhsdhi");
+		// topPanel.add(j);
+
 		// --------------------------------------------------------------
 
 		JTabbedPane medicalStockPane = new JTabbedPane();
 		stockPanel = new JPanel();
 		stockPanel.setLayout(new BorderLayout());
 		stockPanel();
-		// add(stockPanel);
 
 		// -------------------- Bill Generation--------
 		medicalStockPane.add("Stock Management", stockPanel);
 
 		JPanel billPanel = new JPanel();
 		medicalStockPane.add("Generate Bill", billPanel);
-		getContentPane().add(medicalStockPane);
+		getContentPane().add(medicalStockPane, BorderLayout.CENTER);
 
 		addWindowListener(new WindowAdapter() {
 			@Override
@@ -95,7 +106,9 @@ public class Medical extends JFrame implements ActionListener {
 	private void stockPanelNorth() {
 		JPanel northPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		stockMenu = new JMenu("Tools");
+		stockMenu.setPreferredSize(new Dimension(50, 30));
 		stockList = new JMenuItem("Stock List");
+		stockList.addActionListener(this);
 		stockMenu.add(stockList);
 		stockMenu.setBorder(new BevelBorder(BevelBorder.RAISED));
 
@@ -109,13 +122,21 @@ public class Medical extends JFrame implements ActionListener {
 	private void stockPanelEast() {
 		JPanel eastPanel = new JPanel();
 		eastPanel.setLayout(new BoxLayout(eastPanel, BoxLayout.Y_AXIS));
-		addMoreRows = new JButton("+"); // new
+
+		addMoreRows = new JButton("+");// new
 										// ImageIcon("resources/images/plus.png"));
+		addMoreRows.setToolTipText("Add More Rows");
+		addMoreRows.setContentAreaFilled(false);
+		addMoreRows.setBorderPainted(true);
+
 		addMoreRows.addActionListener(this);
 		eastPanel.add(addMoreRows);
 
-		removeRows = new JButton("--"); // new
+		removeRows = new JButton("--");// new
 										// ImageIcon("resources/images/minus.png"));
+		removeRows.setToolTipText("Remove Rows");
+		removeRows.setContentAreaFilled(false);
+		removeRows.setBorderPainted(true);
 		removeRows.addActionListener(this);
 		eastPanel.add(removeRows);
 
@@ -138,26 +159,28 @@ public class Medical extends JFrame implements ActionListener {
 		JPanel tablePanel = new JPanel();
 		tablePanel.setLayout(new GridLayout());
 
-		Object[][] data = new Object[][] { { serialNo, "Avail1",
-				new java.util.Date(), new java.util.Date(),
-				new java.util.Date(), 10, 10, 100 } };
+		Object[][] data = new Object[][] { { serialNo } };
 		Object[] column = new Object[] { "S.N.", "Name of Medicine", "Today",
 				"MFG Date", "EXP Date", "Total Packets", "Tablet in a Packet",
 				"Total Medicines" };
 
-		dm = new DefaultTableModel(data, column);
-		// {
-		//
-		// private static final long serialVersionUID = -3082894031868827075L;
-		//
-		// @Override
-		// public Class<? extends Object> getColumnClass(int column) {
-		// if (column == 2) {
-		// return Date.class;
-		// }
-		// return getValueAt(0, column).getClass();
-		// }
-		// };
+		dm = new DefaultTableModel(data, column) {
+			private static final long serialVersionUID = -3082894031868827075L;
+
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				// Only 1st and 7th columns are noneditable
+				return !(column == 0 || column == 7);
+			}
+
+			// @Override
+			// public Class<? extends Object> getColumnClass(int column) {
+			// if (column == 2) {
+			// return Date.class;
+			// }
+			// return getValueAt(0, column).getClass();
+			// }
+		};
 
 		stockTable = new JTable(dm);
 		stockTable.setRowHeight(20);
@@ -192,14 +215,14 @@ public class Medical extends JFrame implements ActionListener {
 		return true;
 	}
 
-//	public static void main(String[] args) {
-//		SwingUtilities.invokeLater(new Runnable() {
-//			@Override
-//			public void run() {
-//				new Medical().setVisible(true);
-//			}
-//		});
-//	}
+	public static void main(String[] args) {
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				new Medical().setVisible(true);
+			}
+		});
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg) {
@@ -211,7 +234,7 @@ public class Medical extends JFrame implements ActionListener {
 				dm.removeRow((int) --serialNo);
 			}
 		} else if (arg.getActionCommand().equalsIgnoreCase(stockList.getText())) {
-
+			new StockList().setVisible(true);
 		}
 
 		else if (arg.getActionCommand().equalsIgnoreCase(

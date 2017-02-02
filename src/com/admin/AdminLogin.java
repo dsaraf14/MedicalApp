@@ -35,7 +35,7 @@ public class AdminLogin extends JFrame implements ActionListener {
 	public static String loggedInEmail;
 
 	public AdminLogin() {
-		int x_axes = 50, y_axes = 70, height = 160, width = 25;
+		int x_axes = 45, y_axes = 70, height = 160, width = 25;
 
 		setSize(600, 300);
 		setLocationRelativeTo(this);

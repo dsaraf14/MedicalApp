@@ -26,7 +26,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
 import com.util.Utility;
@@ -40,6 +39,7 @@ public class ManageAccount extends JFrame implements ActionListener {
 	private JPanel tablePanel = new JPanel();
 	private JPanel buttonPanel = new JPanel();
 	private JButton refresh, update;
+	private DefaultTableModel dm;
 
 	public ManageAccount() {
 		setSize(800, 400);
@@ -99,8 +99,7 @@ public class ManageAccount extends JFrame implements ActionListener {
 				rs.next();
 			}
 
-			DefaultTableModel dm = new DefaultTableModel(tableValues,
-					tableColumn) {
+			dm = new DefaultTableModel(tableValues, tableColumn) {
 				private static final long serialVersionUID = 1L;
 
 				@Override
@@ -111,7 +110,20 @@ public class ManageAccount extends JFrame implements ActionListener {
 				@Override
 				public boolean isCellEditable(int row, int column) {
 					// Only the third & forth column is editable
-					return column == 3 || column == 4;
+
+					int tempRow = 0;
+					for (int i = 0; i < dm.getRowCount(); i++) {
+						String role = (String) table.getValueAt(i, 3);
+						if (role.equals(Utility.readProperties().getProperty(
+								"AdminRole"))) {
+							tempRow = i;
+						}
+					}
+					if (row == tempRow) {
+						return false;
+					} else {
+						return column == 3 || column == 4;
+					}
 				}
 			};
 
@@ -145,14 +157,14 @@ public class ManageAccount extends JFrame implements ActionListener {
 		return bx;
 	}
 
-	// public static void main(String[] args) {
-	// SwingUtilities.invokeLater(new Runnable() {
-	// @Override
-	// public void run() {
-	// new ManageAccount().setVisible(true);
-	// }
-	// });
-	// }
+//	public static void main(String[] args) {
+//		SwingUtilities.invokeLater(new Runnable() {
+//			@Override
+//			public void run() {
+//				new ManageAccount().setVisible(true);
+//			}
+//		});
+//	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg) {
